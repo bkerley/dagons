@@ -36,7 +36,6 @@ module.exports  = class Player
   handleInput: ->
     # don't move if you're dead
     if @dead != 0
-      @speed = 0
       @position.angle = Math.PI * @dead / 10.0
       @dead++
       return
