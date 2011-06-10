@@ -34,11 +34,8 @@ module.exports  = class Player
     @flash    = opts.flash    || 0 # draw a flash around the dragon this turn (player respawn, what else?)
 
   handleInput: ->
-    # don't move if you're dead
     if @dead != 0
-      @position.angle = Math.PI * @dead / 10.0
-      @dead++
-      return
+      return @handleInputDead()
 
     if @controls.spacePressed
       @dead = 1
@@ -66,6 +63,12 @@ module.exports  = class Player
        @position.angle -= Math.PI * 2.0
     if @position.angle < 0.0
        @position.angle += Math.PI * 2.0
+
+  handleInputDead: ->
+    @position.angle = Math.PI * @dead / 10.0
+    @damage += @dead
+    @dead++
+    @speed++
 
   updateEnergy: ->
     if @thrusting()  # how can we be thrusting without any gas?
