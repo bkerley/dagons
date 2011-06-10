@@ -42,6 +42,7 @@ module.exports  = class Player
       return
 
     if @controls.spacePressed
+      @dead = 1
       @breathing = Math.PI
     if @controls.wPressed and @speed < constants.maxSpeed
       @speed += constants.accelRate
