@@ -13,6 +13,7 @@ module.exports =
   fireDistanceSquared: 1600.0 # 4 or 5 dragon widths
   playerTurnRate: 0.005
   deadlyDamage: 100
+  explodeyDamage: 300
   deathAnimationTime: 50
   syncTimer: 25
   maxPowerups: 10
