@@ -65,10 +65,9 @@ module.exports  = class Player
        @position.angle += Math.PI * 2.0
 
   handleInputDead: ->
-    @position.angle = Math.PI * @dead / 10.0
     @damage += @dead
     @dead++
-    @speed++
+    @speed /= 1.05
 
   updateEnergy: ->
     if @thrusting()  # how can we be thrusting without any gas?
