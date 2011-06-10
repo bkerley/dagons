@@ -153,6 +153,27 @@ module.exports  = class Player
 
     context.restore()
 
+  drawBurning: (context) ->
+    width = 16
+    blocksize = 8
+    rate = 1.3
+    transparency = 1 - Math.log( 1 + (@damage / constants.deadlyDamage) )
+
+    context.save()
+    context.translate 0, 40
+
+    for dist in [4..0]
+      blocks = Math.ceil(width / blocksize)
+      x = -(width / 2)
+      y = -(blocksize * dist)
+      for block in [0 .. blocks]
+        opacity = (parseInt(Math.random() * 100) / 100) - transparency
+        context.fillStyle = "rgba(127,127,127,#{opacity})"
+        context.fillRect x + (block * blocksize), y, blocksize+1, blocksize+1
+      width = width * rate
+
+    context.restore()
+
   drawName: (context) ->
     context.save()
     context.translate @position.x, @position.y
@@ -185,5 +206,6 @@ module.exports  = class Player
       @flash = 0
     @drawShip context
     @drawFire context if @breathing
+    @drawBurning context if @dead != 0
     context.restore()
     @drawName(context)
