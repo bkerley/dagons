@@ -207,11 +207,13 @@ module.exports = class Universe
       @self.dead++
       if @self.dead == 1
         console.log "#{@self.name} died at tick #{@tick_count}"
-        @self.damage = "dead"
         @self.trail = []
-      else if @self.dead >= constants.deathAnimationTime
+      else if @self.dead >= constants.deathAnimationTime or
+              @self.damage >= constants.explodeyDamage
         @self.damage = 0
         @self.dead = 0
+        @self.speed = 0
+        @self.energy = constants.maxEnergy
         @self.position.x = Math.random() * constants.universeWidth
         @self.position.y = Math.random() * constants.universeHeight
         @self.flash = 1
